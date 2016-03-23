@@ -13,6 +13,15 @@ module Factorio
     SERVICE_PREFIX = 'factorio-'
     SAVE_PATH = '/var/Factorio'
 
+    def autholized?
+      begin
+        p @client.nodes.all #通信が発生すればなんでもいい
+      rescue
+        return false
+      end
+      true
+    end
+
     def start(world_name)
       # service = client.services.all.find {|service| service.name == 'factorio-sho2010'}
       # client.services.start()
