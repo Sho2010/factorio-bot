@@ -13,19 +13,27 @@ module Factorio
           open(uri) { |raw| file.write(raw.read) }
         end
       end
+
+      def create_controller(user, apikey)
+        @controller = FactorioContarinerController.new(user, apikey)
+      end
+
+      def controller
+        @controller 
+      end
     end
 
     class FactorioContarinerController
 
-      attr_accessor :client, :config
+      attr_accessor :docker_cloud_client
 
-      def initialize()
-        @client = DockerCloud::Client.new(ENV['DOCKER_CLOUD_USER'], ENV['DOCKER_CLOUD_API_KEY'])
+      def initialize(user, apikey)
+        @docker_cloud_client = DockerCloud::Client.new(user, apikey)
       end
 
       def autholized?
         begin
-          p @client.nodes.all #通信が発生すればなんでもいい
+          p docker_cloud_client.nodes.all #通信が発生すればなんでもいい
         rescue
           return false
         end

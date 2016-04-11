@@ -3,8 +3,14 @@ require 'open-uri'
 require 'active_support'
 require 'active_support/core_ext'
 
-controller = Factorio::Server::FactorioContarinerController.new
-raise "DockerCloud authlized error."  unless controller.autholized?
+hello do
+  controller = Factorio::Server.create_controller(
+    Slappy.configuration.docker.user,
+    Slappy.configuration.docker.apikey
+  )
+
+  raise "DockerCloud authlized error."  unless controller.autholized?
+end
 
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
   world_name = args[1].present? ? args[1] : File.basename(args[0].delete('<>'))
@@ -15,6 +21,6 @@ respond 'start (.*)', from: { channel: '#bot-test' } do |event|
 end
 
 respond 'list', from: { channel: '#bot-test' } do |event|
-  say controller.world_list.join("\n"), channel: event.channel
+  say Factorio::Server.controller.world_list.join("\n"), channel: event.channel
 end
 
