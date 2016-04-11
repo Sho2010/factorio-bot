@@ -1,3 +1,5 @@
+require './lib/factorio/factorio_configuration.rb'
+
 Slappy.configure do |config|
   ## Slappy Settings
   #
@@ -64,4 +66,13 @@ Slappy.configure do |config|
   #    URL to an image to use as the icon for this message
   #
   # config.robot.icon_url = nil
+  #
+
+  # factorio configures
+  config.extend Slappy::Factorio
+  # config.factorio.mod_path = '/var/factorio/mod'
+  # config.factorio.save_path = '/var/factorio/saves'
+  # config.factorio.service_name = 'factorio'
+
 end
+
