@@ -13,11 +13,11 @@ hello do
 end
 
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
-  world_name = args[1].present? ? args[1] : File.basename(args[0].delete('<>'))
-  Factorio::Server.start(args[0], world_name)
+  say "最初のオプションがURIじゃないっぽ" unless event.matches[1] =~ URI::regexp
 
-  # say '立ち上げた、ちょっと待ってから `list` でIPだして', channel: event.channel
-  say world_name 
+  # TODO: implement me
+  # world_name = event.matches[2].present? ? args[1] : File.basename(args[0].delete('<>'))
+  Factorio::Server.controller.start("world_name")
 end
 
 respond 'list', from: { channel: '#bot-test' } do |event|

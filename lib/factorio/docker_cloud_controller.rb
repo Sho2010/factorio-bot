@@ -1,5 +1,6 @@
 require 'base64'
 require 'docker_cloud'
+require './lib/factorio/operations/start'
 
 module Factorio
   module Server
@@ -24,6 +25,7 @@ module Factorio
     end
 
     class FactorioContarinerController
+      include Factorio::Server::Start
 
       attr_accessor :docker_cloud_client
 
