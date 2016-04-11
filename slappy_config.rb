@@ -1,4 +1,5 @@
 require './lib/factorio/factorio_configuration.rb'
+require './lib/factorio/docker_cloud_configuration.rb'
 
 Slappy.configure do |config|
   ## Slappy Settings
@@ -73,6 +74,26 @@ Slappy.configure do |config|
   # config.factorio.mod_path = '/var/factorio/mod'
   # config.factorio.save_path = '/var/factorio/saves'
   # config.factorio.service_name = 'factorio'
+
+
+  # dockercloud configures
+  config.extend Slappy::DockerCloud
+  #
+  # user:
+  #   DockerCloud user name
+  #
+  # config.docker_cloud.user = ENV['DOCKERCLOUD_USRE']
+
+  #
+  # apikey:
+  #   DockerCloud API key
+  #
+  # config.docker_cloud.apikey = ENV['DOCKERCLOUD_APIKEY']
+
+  # service_name
+  #   docker cloud factorio server service name
+  #
+  # config.docker_cloud.service_name = 'factorio'
 
 end
 
