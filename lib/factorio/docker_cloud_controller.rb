@@ -7,7 +7,7 @@ module Factorio
     attr_accessor :client
 
     def initialize()
-      @client = DockerCloud::Client.new(ENV['DOCKER_CLOUD_USER'], ENV['DOCKER_CLOUD_API_KEY'])
+      @client = DockerCloud::Client.new(ENV['DOCKERCLOUD_USER'], ENV['DOCKERCLOUD_APIKEY'])
     end
 
     SERVICE_PREFIX = 'factorio-'

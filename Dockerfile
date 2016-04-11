@@ -2,7 +2,7 @@ FROM ruby:onbuild
 MAINTAINER Sho2010
 
 ENV SLACK_TOKEN="" \
-    DOCKER_CLOUD_API_KEY="" \
-    DOCKER_CLOUD_USER=""
+    DOCKERCLOUD_APIKEY="" \
+    DOCKERCLOUD_USER=""
 
 CMD ["slappy", "start"]
