@@ -9,7 +9,7 @@ module Slappy
     end
 
     class Configuration
-      attr_accessor :save_path, :mod_path, :service_name
+      attr_accessor :save_path, :mod_path
 
       def save_path
         @save_path || ENV['FACTORIO_SAVE_PATH']
@@ -18,11 +18,6 @@ module Slappy
       def mod_path
         @mod_path || ENV['FACTORIO_MOD_PATH']
       end
-
-      def service_name 
-        @service_name || ENV['DOCKERCLOUD_SERVICE_NAME']
-      end
-
     end
   end
 end
