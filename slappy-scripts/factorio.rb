@@ -13,16 +13,16 @@ hello do
 end
 
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
-  say '最初のオプションがURIじゃないっぽ' unless event.matches[1] =~ URI::regexp
+  say '最初のオプションがURIじゃないっぽ', channel: event.channel unless event.matches[1] =~ URI::regexp
 
   world_name = File.basename(event.matches[1].delete('<>'))
-  say "#{world_name}でfactorio serverを起動。" 
+  say "#{world_name}でfactorio serverを起動。", channel: event.channel
 
   begin
     Factorio::Server.controller.start(world_name)
-    say '起動した。ちょっと待って'
+    say '起動した。ちょっと待って', channel: event.channel
   rescue => e
-    say "起動失敗した: #{e}"
+    say "起動失敗した: #{e}", channel: event.channel
   end
 
 end
