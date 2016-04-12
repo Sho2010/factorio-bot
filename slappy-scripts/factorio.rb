@@ -15,7 +15,11 @@ end
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
   say '最初のオプションがURIじゃないっぽ', channel: event.channel unless event.matches[1] =~ URI::regexp
 
-  world_name = File.basename(event.matches[1].delete('<>'))
+  say "ファイルをダウンロードしています。", channel: event.channel
+  uri = event.matches[1].delete('<>')
+  world_name = File.basename(uri)
+  Slappy.download_file(uri, world_name)
+
   say "#{world_name}でfactorio serverを起動。", channel: event.channel
 
   begin
