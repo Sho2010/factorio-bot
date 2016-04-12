@@ -6,7 +6,9 @@ module Factorio
   module Server
     class << self
       def world_file_exist?(world_name)
-        config.factorio.save_path
+        return true
+        # TODO: implement file check option
+        # File.exists? File.join(config.factorio.save_path, world_name)
       end
 
       def download_file(uri, path)
@@ -20,16 +22,21 @@ module Factorio
       end
 
       def controller
-        @controller 
+        @controller
+      end
+
+      def config
+        Slappy::configuration
       end
     end
 
     class FactorioContarinerController
       include Factorio::Server::Start
 
-      attr_accessor :docker_cloud_client
+      attr_accessor :docker_cloud_client, :service_name
 
-      def initialize(user, apikey)
+      def initialize(user, apikey, service_name='factorio')
+        @service_name = service_name
         @docker_cloud_client = DockerCloud::Client.new(user, apikey)
       end
 
@@ -40,6 +47,16 @@ module Factorio
           return false
         end
         true
+      end
+
+      def service
+        @service ||= service! 
+      end
+
+      # Always API call
+      def service!
+        temp = docker_cloud_client.services.all.find { |s| s.name == service_name }
+        @service = docker_cloud_client.services.get(temp.uuid)
       end
 
     end
