@@ -3,19 +3,31 @@ require 'open-uri'
 require 'active_support'
 require 'active_support/core_ext'
 
-controller = Factorio::ServerController.new
-raise "DockerCloud authlized error."  unless controller.autholized?
+hello do
+  controller = Factorio::Server.create_controller(
+    Slappy.configuration.docker.user,
+    Slappy.configuration.docker.apikey
+  )
+
+  raise 'DockerCloud authlized error.'  unless controller.autholized?
+end
 
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
-  world_name = args[1].present? ? args[1] : File.basename(args[0].delete('<>'))
+  say '最初のオプションがURIじゃないっぽ', channel: event.channel unless event.matches[1] =~ URI::regexp
 
-  Factorio::Server.start(args[0], world_name)
+  world_name = File.basename(event.matches[1].delete('<>'))
+  say "#{world_name}でfactorio serverを起動。", channel: event.channel
 
-  # say '立ち上げた、ちょっと待ってから `list` でIPだして', channel: event.channel
-  say world_name 
+  begin
+    Factorio::Server.controller.start(world_name)
+    say '起動した。ちょっと待って', channel: event.channel
+  rescue => e
+    say "起動失敗した: #{e}", channel: event.channel
+  end
+
 end
 
 respond 'list', from: { channel: '#bot-test' } do |event|
-  say controller.world_list.join("\n"), channel: event.channel
+  say Factorio::Server.controller.world_list.join('\n'), channel: event.channel
 end
 

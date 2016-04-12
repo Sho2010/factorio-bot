@@ -1,3 +1,6 @@
+require './lib/factorio/factorio_configuration.rb'
+require './lib/factorio/docker_cloud_configuration.rb'
+
 Slappy.configure do |config|
   ## Slappy Settings
   #
@@ -64,4 +67,48 @@ Slappy.configure do |config|
   #    URL to an image to use as the icon for this message
   #
   # config.robot.icon_url = nil
+  #
+
+  ###
+  # factorio configures
+  config.extend Slappy::Factorio
+
+  # factorio.save_path
+  #     factorio save file directory
+  #     ENV['FACTORIO_SAVE_PATH']
+  #
+  # config.factorio.save_path = '/factorio/saves'
+
+  # factorio.mod_path
+  #     mod directory
+  #     ENV['FACTORIO_MOD_PATH']
+  #
+  # config.factorio.mod_path = '/factorio/mod'
+
+  # factorio.file_check
+  #     save data exists check. 
+  #
+  # config.factorio.file_check = true 
+
+  ####
+  # dockercloud configures
+  config.extend Slappy::DockerCloud
+  #
+  # user:
+  #   DockerCloud user name
+  #
+  # config.docker_cloud.user = ENV['DOCKERCLOUD_USRE']
+
+  #
+  # apikey:
+  #   DockerCloud API key
+  #
+  # config.docker_cloud.apikey = ENV['DOCKERCLOUD_APIKEY']
+
+  # service_name
+  #   docker cloud factorio server service name
+  #
+  # config.docker_cloud.service_name = 'factorio'
+
 end
+
