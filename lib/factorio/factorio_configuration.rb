@@ -10,6 +10,7 @@ module Slappy
 
     class Configuration
       attr_accessor :save_path, :mod_path
+      attr_writer :file_check
 
       def save_path
         @save_path || ENV['FACTORIO_SAVE_PATH']
@@ -17,6 +18,10 @@ module Slappy
 
       def mod_path
         @mod_path || ENV['FACTORIO_MOD_PATH']
+      end
+
+      def file_check?
+        !!@file_check
       end
     end
   end

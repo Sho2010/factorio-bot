@@ -75,6 +75,7 @@ Slappy.configure do |config|
 
   # factorio.save_path
   #     factorio save file directory
+  #     Downloaded file write here.
   #     ENV['FACTORIO_SAVE_PATH']
   #
   # config.factorio.save_path = '/factorio/saves'
