@@ -6,9 +6,9 @@ module Factorio
   module Server
     class << self
       def world_file_exist?(world_name)
-        return true
-        # TODO: implement file check option
-        # File.exists? File.join(config.factorio.save_path, world_name)
+        return true unless config.factorio.file_check?
+        
+        File.exists? File.join(config.factorio.save_path, world_name)
       end
 
       def download_file(uri, path)
