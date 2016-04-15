@@ -1,6 +1,7 @@
 require 'base64'
 require 'docker_cloud'
 require './lib/factorio/operations/start'
+require './lib/factorio/operations/world_info'
 
 module Factorio
   module Server
@@ -32,6 +33,7 @@ module Factorio
 
     class FactorioContarinerController
       include Factorio::Server::Start
+      include Factorio::Server::WorldList
 
       attr_accessor :docker_cloud_client, :service_name
 
