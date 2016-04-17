@@ -12,7 +12,7 @@ hello do
   raise 'DockerCloud authlized error.'  unless controller.autholized?
 end
 
-respond 'start (.*)', from: { channel: '#bot-test' } do |event|
+respond 'start (.*)', from: { channel: 'G0L1ZHRME' } do |event|
   unless event.matches[1] =~ URI::regexp
     say '最初のオプションがURIじゃないっぽ', channel: event.channel
     return
@@ -34,7 +34,7 @@ respond 'start (.*)', from: { channel: '#bot-test' } do |event|
 
 end
 
-respond 'list', from: { channel: '#bot-test' } do |event|
+respond 'list', from: { channel: 'G0L1ZHRME' } do |event|
   list = Factorio::Server.controller.world_list
   if list.empty?
     say '何も動いてないっぽい', channel: event.channel
@@ -43,7 +43,7 @@ respond 'list', from: { channel: '#bot-test' } do |event|
   end
 end
 
-respond 'stop (\d*)', from: { channel: '#bot-test' } do |event|
+respond 'stop (\d*)', from: { channel: 'G0L1ZHRME' } do |event|
   port = event.matches[1].to_i
   begin
     Factorio::Server.controller.stop(port)
@@ -51,4 +51,8 @@ respond 'stop (\d*)', from: { channel: '#bot-test' } do |event|
   rescue => e
     say "停止失敗: #{e}", channel: event.channel
   end
+end
+
+respond 'hello' do |event|
+  binding.pry
 end
