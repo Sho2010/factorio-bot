@@ -74,3 +74,11 @@ Show running containers filename, ip and port.
 factorio-bot list
 ~~~
 
+- - -
+
+![start](https://github.com/sho2010/factorio-bot/wiki/images/start.png)
+
+- - -
+
+![stop](https://github.com/sho2010/factorio-bot/wiki/images/stop2.png)
+
