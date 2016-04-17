@@ -35,7 +35,12 @@ respond 'start (.*)', from: { channel: '#bot-test' } do |event|
 end
 
 respond 'list', from: { channel: '#bot-test' } do |event|
-  say Factorio::Server.controller.world_list.join('\n'), channel: event.channel
+  list = Factorio::Server.controller.world_list
+  if list.empty?
+    say '何も動いてないっぽい', channel: event.channel
+  else
+    say list.join('\n'), channel: event.channel
+  end
 end
 
 respond 'stop (\d*)', from: { channel: '#bot-test' } do |event|
