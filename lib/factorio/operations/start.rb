@@ -7,11 +7,6 @@ module Factorio
       class ServerStartError < StandardError; end
       class ContainerFullError < StandardError; end
 
-      # TODO: Implement me. force deploy container
-      # def start!(world_name, stop_world) 
-      #   fail ServerStartError, "world file not exists." unless Factorio::Server.world_file_exist? world_name
-      # end
-
       def start(world_name)
         fail ServerStartError, "world file not exists." unless Factorio::Server.world_file_exist? world_name
 
