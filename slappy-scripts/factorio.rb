@@ -13,7 +13,10 @@ hello do
 end
 
 respond 'start (.*)', from: { channel: '#bot-test' } do |event|
-  say '最初のオプションがURIじゃないっぽ', channel: event.channel unless event.matches[1] =~ URI::regexp
+  unless event.matches[1] =~ URI::regexp
+    say '最初のオプションがURIじゃないっぽ', channel: event.channel
+    return
+  end
 
   say "ファイルをダウンロードしています。", channel: event.channel
   uri = event.matches[1].delete('<>')
@@ -35,3 +38,12 @@ respond 'list', from: { channel: '#bot-test' } do |event|
   say Factorio::Server.controller.world_list.join('\n'), channel: event.channel
 end
 
+respond 'stop (\d*)', from: { channel: '#bot-test' } do |event|
+  port = event.matches[1].to_i
+  begin
+    Factorio::Server.controller.stop(port)
+    say '止めた。', channel: event.channel
+  rescue => e
+    say "停止失敗: #{e}", channel: event.channel
+  end
+end
