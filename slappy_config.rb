@@ -98,7 +98,7 @@ Slappy.configure do |config|
   # user:
   #   DockerCloud user name
   #
-  # config.docker_cloud.user = ENV['DOCKERCLOUD_USRE']
+  # config.docker_cloud.user = ENV['DOCKERCLOUD_USER']
 
   #
   # apikey:
