@@ -39,7 +39,7 @@ respond 'list', from: { channel: '#bot-test' } do |event|
   if list.empty?
     say '何も動いてないっぽい', channel: event.channel
   else
-    say list.join('\n'), channel: event.channel
+    say list.join("\n"), channel: event.channel
   end
 end
 
