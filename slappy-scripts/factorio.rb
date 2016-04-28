@@ -20,7 +20,7 @@ respond 'start (.*)', from: { channel: '#bot-test' } do |event|
 
   say "ファイルをダウンロードしています。", channel: event.channel
   uri = event.matches[1].delete('<>')
-  world_name = File.basename(uri)
+  world_name = File.basename(uri).gsub(/\?.*$/, "")
   Slappy.download_file(uri, world_name)
 
   say "#{world_name}でfactorio serverを起動。", channel: event.channel
